@@ -20,3 +20,35 @@ class Queue {
     _queueNode* _begin;
     _queueNode* _end;
 };
+
+class publicChildQueue : public Queue {
+  private:
+    _queueNode* _begin;
+    _queueNode* _end;
+};
+
+class protectedChildQueue : protected Queue {
+  public:
+    using Queue::push;
+    using Queue::pop;
+    using Queue::print;
+    using Queue::isEmpty;
+    
+    using Queue::Queue;
+  private:
+    _queueNode* _begin;
+    _queueNode* _end;
+};
+
+class privateChildQueue : private Queue {
+  public:
+    using Queue::push;
+    using Queue::pop;
+    using Queue::print;
+    using Queue::isEmpty;
+    
+    using Queue::Queue;
+  private:
+    _queueNode* _begin;
+    _queueNode* _end;
+};
