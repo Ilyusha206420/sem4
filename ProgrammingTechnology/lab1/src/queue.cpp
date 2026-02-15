@@ -2,14 +2,14 @@
 
 #include <iostream>
 
-void Queue::push(int dat)
+void Parent::Queue::push(int dat)
 {
   _end->data = dat;
   _end->prev = new _queueNode();
   this->_end = _end->prev;
 }
 
-int Queue::pop()
+int Parent::Queue::pop()
 {
   if (!_begin->prev) 
     throw "Attemt to pop from empty queue";
@@ -20,7 +20,7 @@ int Queue::pop()
   return res;
 }
 
-void Queue::print()
+void Parent::Queue::print()
 {
   _queueNode* node = _begin;
   while (node->prev) {
@@ -30,7 +30,7 @@ void Queue::print()
   std::cout << std::endl;
 }
 
-Queue::~Queue()
+Parent::Queue::~Queue()
 {
   _queueNode* node = _begin;
   _queueNode* prevNode;
@@ -41,7 +41,7 @@ Queue::~Queue()
   }
 }
 
-Queue::Queue(const Queue& src) :
+Parent::Queue::Queue(const Queue& src) :
 _begin(new _queueNode),
 _end(_begin)
 {
