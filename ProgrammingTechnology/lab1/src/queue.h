@@ -15,6 +15,8 @@ namespace Parent {
       void print();
       bool isEmpty() { return !_begin->prev; };
 
+      int calculateScopeOdd();
+
       Queue(): _begin(new _queueNode()), _end(_begin) {};
       Queue(const Queue& src);
       ~Queue();
@@ -34,6 +36,7 @@ namespace Child {
       int pop() { return Parent::Queue::pop(); };
       void print() { Parent::Queue::print(); };
       bool isEmpty() { return Parent::Queue::isEmpty(); };
+      int calculateScopeOdd() { return Parent::Queue::calculateScopeOdd(); };
   };
 
   class privateQueue : private Parent::Queue {
@@ -42,5 +45,6 @@ namespace Child {
       int pop() { return Parent::Queue::pop(); };
       void print() { Parent::Queue::print(); };
       bool isEmpty() { return Parent::Queue::isEmpty(); };
+      int calculateScopeOdd() { return Parent::Queue::calculateScopeOdd(); };
   };
 }
