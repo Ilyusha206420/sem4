@@ -1,6 +1,7 @@
 #include "queue.h"
 
 #include <iostream>
+#include <climits>
 
 void Parent::Queue::push(int dat)
 {
@@ -28,6 +29,17 @@ void Parent::Queue::print()
     node = node->prev;
   }
   std::cout << std::endl;
+}
+
+int Parent::Queue::calculateScopeOdd()
+{
+  int max = INT_MIN, min = INT_MAX;
+  _queueNode* node = _begin;
+  while (node->prev) {
+    max = node->data > max ? node->data : max;
+    min = node->data < min ? node->data : min;
+  }
+  return min < max ? max - min : min - max;
 }
 
 Parent::Queue::~Queue()
