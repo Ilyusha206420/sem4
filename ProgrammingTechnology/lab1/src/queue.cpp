@@ -35,11 +35,13 @@ int Parent::Queue::calculateScopeOdd()
 {
   int max = INT_MIN, min = INT_MAX;
   _queueNode* node = _begin;
-  while (node->prev) {
+  while (node && node->prev) {
     max = node->data > max ? node->data : max;
     min = node->data < min ? node->data : min;
+    std::cout << "Max: " << max << '\n' << "Min " << min << std::endl;
+    node = node->prev->prev;
   }
-  return min < max ? max - min : min - max;
+  return max - min;
 }
 
 Parent::Queue::~Queue()

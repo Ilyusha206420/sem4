@@ -1,22 +1,10 @@
 #include "queue.h"
-#include <cstring>
 #include <iostream>
+#include <ostream>
 
 int main(int argc, char** argv)
 {
-  if (argc == 2) {
-    if (strcmp(argv[1], "-private")) {
-      Child::privateQueue queueObj;
-    } else if (strcmp(argv[1], "-protected")) {
-      Child::protectedQueue queueObj;
-    } else if (strcmp(argv[1], "-public")) {
-      Child::publicQueue queueObj;
-    } else {
-      Child::publicQueue queueObj;
-    }
-  } else {
-    Child::publicQueue queueObj;
-  }
+  Child::publicQueue queueObj;
 
   bool running = 1;
   int input = 0;
@@ -25,7 +13,26 @@ int main(int argc, char** argv)
     std::cin >> input;
     std::cout << std::endl;
     switch (input) {
-      case 0:
+      case 1:
+        std::cout << "Enter number you want to add: ";
+        std::cin >> input;
+        queueObj.push(input);
+        std::cout << "Number added" << std::endl;
+        break;
+      case 2:
+        if (queueObj.isEmpty())
+          std::cout << "Can't pop element from empty queue!" << std::endl;
+        else 
+          std::cout << "Poped element: " << queueObj.pop() << std::endl;
+        break;
+      case 3:
+        std::cout << "Your queue: " << std::endl;
+        queueObj.print();
+        break;
+      case 4:
+        std::cout << "Scope of odd elements in queue: " << queueObj.calculateScopeOdd() << std::endl;
+        break;
+      case 7:
         running = 0;
         break;
       default:
