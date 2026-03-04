@@ -5,7 +5,7 @@
 int main(int argc, char** argv)
 {
   Child::publicQueue queueObj;
-
+  Child::publicQueue copy;
   bool running = 1;
   int input = 0;
   while (running) {
@@ -31,6 +31,15 @@ int main(int argc, char** argv)
         break;
       case 4:
         std::cout << "Scope of odd elements in queue: " << queueObj.calculateScopeOdd() << std::endl;
+        break;
+      case 5:
+        copy = Child::publicQueue(queueObj);
+        std::cout << "Queue copied" << std::endl;
+        break;
+      case 6:
+        queueObj.merge(copy);
+        std::cout << "Queue merged" << std::endl;
+        queueObj.print();
         break;
       case 7:
         running = 0;

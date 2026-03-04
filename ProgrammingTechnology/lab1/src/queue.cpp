@@ -44,6 +44,18 @@ int Parent::Queue::calculateScopeOdd()
   return max - min;
 }
 
+void Parent::Queue::merge(Queue& src)
+{
+  src._end = this->_end;
+  this->_end = _begin;
+  while (this->_end->prev->prev)
+    this->_end = _end->prev;
+  std::cout << _end->data;
+  _end->prev = src._begin;
+  this->print();
+  src._begin = src._end;
+}
+
 Parent::Queue::~Queue()
 {
   _queueNode* node = _begin;

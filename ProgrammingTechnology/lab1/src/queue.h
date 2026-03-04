@@ -14,6 +14,7 @@ namespace Parent {
       int pop();
       void print();
       bool isEmpty() { return !_begin->prev; };
+      void merge(Queue& src);
 
       int calculateScopeOdd();
 
