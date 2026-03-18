@@ -3,14 +3,14 @@
 #include <iostream>
 #include <climits>
 
-void Parent::Queue::push(int dat)
+void Queue::push(int dat)
 {
   _end->data = dat;
   _end->prev = new _queueNode();
   this->_end = _end->prev;
 }
 
-int Parent::Queue::pop()
+int Queue::pop()
 {
   if (!_begin->prev) 
     throw "Attemt to pop from empty queue";
@@ -21,7 +21,7 @@ int Parent::Queue::pop()
   return res;
 }
 
-void Parent::Queue::print()
+void Queue::print()
 {
   _queueNode* node = _begin;
   while (node->prev) {
@@ -31,7 +31,7 @@ void Parent::Queue::print()
   std::cout << std::endl;
 }
 
-int Parent::Queue::calculateScopeOdd()
+int Queue::calculateScopeOdd()
 {
   int max = INT_MIN, min = INT_MAX;
   _queueNode* node = _begin;
@@ -44,19 +44,16 @@ int Parent::Queue::calculateScopeOdd()
   return max - min;
 }
 
-void Parent::Queue::merge(Queue& src)
+void Queue::merge(Queue& src)
 {
-  src._end = this->_end;
-  this->_end = _begin;
-  while (this->_end->prev->prev)
-    this->_end = _end->prev;
-  std::cout << _end->data;
+  _end->data = src.pop();
   _end->prev = src._begin;
-  this->print();
-  src._begin = src._end;
+  _end = src._end;
+  src ._begin = new _queueNode();
+  src._end = src._begin;
 }
 
-Parent::Queue::~Queue()
+Queue::~Queue()
 {
   _queueNode* node = _begin;
   _queueNode* prevNode;
@@ -67,7 +64,7 @@ Parent::Queue::~Queue()
   }
 }
 
-Parent::Queue::Queue(const Queue& src) :
+Queue::Queue(const Queue& src) :
 _begin(new _queueNode),
 _end(_begin)
 {
