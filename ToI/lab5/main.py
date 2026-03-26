@@ -19,20 +19,22 @@ for l in range(0, 3):
     
   dArrs.append([d, N, l, 0])
 
+entrops = [0, 0, 0]
+
 for d, l, it, _ in dArrs:
-  sortedDict = dict(sorted(d.items(), key=lambda x: x[1], reverse=True))
   q = 0
   midLen = 0
-  for key in sortedDict:
-    p = sortedDict[key][0] / l
+  entropy = 0
+  for key in d:
+    p = d[key][0] / l
     I = -math.log2(p)
-    lenght = math.ceil(I)
-    sortedDict[key][1] = p
-    sortedDict[key][2] = I
-    sortedDict[key][3] = q
-    sortedDict[key][4] = lenght
-    qc = q
-    s = ""
+    lenght = math.ceil(I) + 1
+    d[key][1] = p
+    d[key][2] = I
+    d[key][3] = q
+    d[key][4] = lenght
+    qc = q + p/2 
+    s = ''
     for i in range(lenght):
       p2 = math.pow(2, -1 * (i + 1))
       if(qc >= p2):
@@ -40,14 +42,14 @@ for d, l, it, _ in dArrs:
         qc -= p2
       else:
         s += '0'
-    sortedDict[key][5] = s
-    q += pl = 7.14620
-R = 3.57310
+    d[key][5] = s
     midLen += p * lenght
+    q += p
+    entropy += p * I
   dArrs[it][3] = midLen
-  dArrs[it][0] = sortedDict
+  entrops[it] = entropy
     
 for d, _, it, l in dArrs:
   for key in d:
-    print(f'|{key:^5}|{d[key][0]:^4}| {d[key][1]:.10f} | {d[key][2]:.5f} | {d[key][3]:.5f} |{d[key][4]:^3}|{d[key][5]:^10}|')
-  print(f'\nl = {l:.5f}\nR = {l/(it + 1):.5f}\n\n')
+    print(f'|{key:^5}|{d[key][0]:^4}| {d[key][1]:.10f} | {d[key][2]:.5f} | {d[key][3]:.5f} |{d[key][4]:^3}|{d[key][5]:^11}|')
+  print(f'\nl = {l:.5f}\nR = {l/(it + 1):.5f}\nr = {(l - entrops[it])/(it + 1):.5f}\n')

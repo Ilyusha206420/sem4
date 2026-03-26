@@ -41,8 +41,6 @@ for d, l, it, _ in dArrs:
       else:
         s += '0'
     sortedDict[key][5] = s
-    q += pl = 7.14620
-R = 3.57310
     midLen += p * lenght
   dArrs[it][3] = midLen
   dArrs[it][0] = sortedDict
