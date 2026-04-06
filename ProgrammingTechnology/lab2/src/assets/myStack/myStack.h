@@ -1,3 +1,5 @@
+#include <ostream>
+
 struct stackNode {
 public:
   int getVal() { return _val; };
@@ -16,6 +18,18 @@ private:
 
 class myStack {
 public:
+  // void operator+(const myStack& other);
+  // void operator*(const myStack& other);
+  // void operator=(const myStack& other);
+  // void operator/(const myStack& other);
+  // void operator-(const myStack& other);
+  // void operator+=(const myStack& other);
+  // void operator*=(const myStack& other);
+  // void operator/=(const myStack& other);
+  // void operator-=(const myStack& other);
+
+  // friend std::ostream operator<<(std::ostream& os, myStack& stack);
+
   myStack();
   ~myStack();
 private:
