@@ -18,6 +18,7 @@ class myDouble {
     myDouble(const myDouble& other): _val(other._val), _delta(other._delta) {};
     myDouble(double value, double delta): _val(value), _delta(delta) {};
     myDouble(): _val(0), _delta(0) {};
+    
   private:
     double _val;
     double _delta;
