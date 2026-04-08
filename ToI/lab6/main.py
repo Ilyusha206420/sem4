@@ -1,55 +1,67 @@
 import math
 
 with open("../inputText", "r", encoding="utf-8") as f:
-  inpStr = f.readline()
-  f.close()
+    inpStr = f.read().strip()
 
-dArrs = []
+char_counts = {}
+for char in inpStr:
+    char_counts[char] = char_counts.get(char, 0) + 1
 
-for l in range(0, 3):
-  d = {}
-  N = 0
-  for i in range(len(inpStr) - l):
-    comb = inpStr[i:i+l+1]
-    if comb in d:
-      d[comb][0] += 1
-    else:
-      d[comb] = [1, 0, 0, 0, 0, ""] # ** N, p, I, q, l, c
-    N += 1
+total_chars = len(inpStr)
+alphabet = sorted(char_counts.keys())
+
+probs = {}
+cum_probs = {}
+entropy = 0
+current_cum = 0
+
+for char in alphabet:
+    p = char_counts[char] / total_chars
+    probs[char] = p
+    cum_probs[char] = current_cum
+    entropy += p * -math.log2(p) 
+    current_cum += p
+
+def arithmetic_encode_block(block):
+    F = 0.0
+    G = 1.0
     
-  dArrs.append([d, N, l, 0])
-
-entrops = [0, 0, 0]
-
-for d, l, it, _ in dArrs:
-  q = 0
-  midLen = 0
-  entropy = 0
-  for key in d:
-    p = d[key][0] / l
-    I = -math.log2(p)
-    lenght = math.ceil(I) + 1
-    d[key][1] = p
-    d[key][2] = I
-    d[key][3] = q
-    d[key][4] = lenght
-    qc = q + p/2 
-    s = ''
-    for i in range(lenght):
-      p2 = math.pow(2, -1 * (i + 1))
-      if(qc >= p2):
-        s += '1'
-        qc -= p2
-      else:
-        s += '0'
-    d[key][5] = s
-    midLen += p * lenght
-    q += p
-    entropy += p * I
-  dArrs[it][3] = midLen
-  entrops[it] = entropy
+    for char in block:
+        q_i = cum_probs[char]
+        p_i = probs[char]
+        
+        F = F + q_i * G
+        G = G * p_i
+        
+    l_size = math.ceil(-math.log2(G)) + 1
     
-for d, _, it, l in dArrs:
-  for key in d:
-    print(f'|{key:^5}|{d[key][0]:^4}| {d[key][1]:.10f} | {d[key][2]:.5f} | {d[key][3]:.5f} |{d[key][4]:^3}|{d[key][5]:^11}|')
-  print(f'\nl = {l:.5f}\nR = {l/(it + 1):.5f}\nr = {(l - entrops[it])/(it + 1):.5f}\n')
+    value = F + G / 2
+    code = ""
+    temp_v = value
+    for _ in range(l_size):
+        temp_v *= 2
+        if temp_v >= 1:
+            code += "1"
+            temp_v -= 1
+        else:
+            code += "0"
+    return code, l_size
+
+block_size = 6
+print(f"{'Блок':^10} | {'Длина кода':^10} | {'Кодовое слово'}")
+print("-" * 50)
+
+total_bits = 0
+num_blocks = 0
+
+for i in range(0, len(inpStr), block_size):
+    block = inpStr[i:i+block_size] 
+    res_code, res_len = arithmetic_encode_block(block)
+    total_bits += res_len
+    num_blocks += 1
+    print(f"{block:^10} | {res_len:^10} | {res_code}")
+    if len(block) < block_size: break
+
+if num_blocks > 0:
+    avg_R = (total_bits / (num_blocks * block_size))
+    print(f"\nСредняя скорость кодирования R_ap = {avg_R:.4f} бит/символ\nЭнотропия: {entropy}\nИзбыточность: {}")
