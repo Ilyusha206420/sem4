@@ -33,7 +33,10 @@ for d, l, it, _ in dArrs:
     d[key][3] = q
     q += p
 
+R = []
+
 for i in range(0, 3):
+  speed = 0
   for msg in msgBlocks:
     F = 0
     G = 1
@@ -50,6 +53,7 @@ for i in range(0, 3):
     for sym in codyngSymbols:
       print(f'|{sym:^5}| {dArrs[i][0][sym][1]:.5f} | {dArrs[i][0][sym][3]:.5f} | {Fd[sym]:.10f} | {Gd[sym]:.10f} |')
     l = -math.ceil(math.log2(G)) + 1
+    speed += l / 6
     cv = F + (G/2)
     code = ""
     for n in range(0, l):
@@ -60,3 +64,7 @@ for i in range(0, 3):
       else:
         code += '0'
     print(f'\n{msg} : {code}\n\n')
+  R.append(speed/len(msgBlocks))
+
+for i in range(0, 3):
+  print(f'R{i+1} = {R[i]}')
