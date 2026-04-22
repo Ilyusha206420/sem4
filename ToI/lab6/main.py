@@ -33,8 +33,6 @@ for d, l, it, _ in dArrs:
     d[key][3] = q
     q += p
 
-R = []
-
 for i in range(0, 3):
   speed = 0
   for msg in msgBlocks:
@@ -64,7 +62,37 @@ for i in range(0, 3):
       else:
         code += '0'
     print(f'\n{msg} : {code}\n\n')
-  R.append(speed/len(msgBlocks))
 
 for i in range(0, 3):
-  print(f'R{i+1} = {R[i]}')
+    d, N, l_block, _ = dArrs[i]
+
+    H_block = 0
+    for key in d:
+        p = d[key][1]
+        if p > 0:
+            H_block -= p * math.log2(p)
+
+    H_symbol = H_block / (i + 1)
+    
+    total_bits = 0
+    total_symbols = 0
+    
+    for msg in msgBlocks:
+        G = 1
+        for s in range(0, 6, i+1):
+            sym = msg[s:s+i+1]
+            G *= d[sym][1]
+
+        L_code = -math.ceil(math.log2(G)) + 1
+        total_bits += L_code
+        total_symbols += 6 
+        
+    R = total_bits / total_symbols
+
+    redundancy = R - H_symbol
+    
+    print(f"--- Результаты для блоков по {i+1} симв. ---")
+    print(f"Энтропия (H):    {H_symbol:.5f} бит/симв")
+    print(f"Скорость (R):    {R:.5f} бит/симв")
+    print(f"Избыточность:    {redundancy:.5f} бит/симв")
+    print("-" * 40)
