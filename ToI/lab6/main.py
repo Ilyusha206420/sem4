@@ -94,5 +94,4 @@ for i in range(0, 3):
     print(f"--- Результаты для блоков по {i+1} симв. ---")
     print(f"Энтропия (H):    {H_symbol:.5f} бит/симв")
     print(f"Скорость (R):    {R:.5f} бит/симв")
-    print(f"Избыточность:    {redundancy:.5f} бит/симв")
-    print("-" * 40)
+    print(f"Избыточность:    {redundancy:.5f} бит/симв\n")
