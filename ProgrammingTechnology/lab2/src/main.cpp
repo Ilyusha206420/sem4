@@ -18,6 +18,14 @@ int main(void)
             << "\n double(d) = " << double(d) << std::endl;
 
   myStack s1, s2;
-  std::cout << "";
+  std::cout << "s1: " << s1 << 
+             "\ns2: " << s2 << 
+             "\n s1 + s2 = " << s1 + s2 <<
+             "\n s1 - s2 = " << s1 - s2 <<
+             "\n s1 * s2 = " << s1 * s2 <<
+             "\n s1 / s2 = " << s1 / s2 << 
+             std::endl;
+  s1 = s2;
+  std::cout << "s1 = s2\ns1: " << s1 << "\ns2: " << s2 << std::endl;
   return 0;
 }

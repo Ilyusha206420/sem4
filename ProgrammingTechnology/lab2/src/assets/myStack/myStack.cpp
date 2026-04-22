@@ -84,7 +84,7 @@ myStack::myStack()
   std::srand(std::time(0));
   _size = 5 + std::rand() % 10;
   _head = new stackNode(std::rand());
-  for (int i = i; i < _size-1; i++) 
+  for (int i = 1; i < _size-1; i++) 
     _head = _head->createAndLink(std::rand());
 }
 
@@ -121,30 +121,30 @@ std::ostream& operator<<(std::ostream& os, myStack& stack)
   return os;
 }
 
-myStack operator+(const myStack& a, const myStack &b)
+myStack& operator+(const myStack& a, const myStack &b)
 {
-  myStack out(a);
-  out += b;
-  return out;
+  myStack *out = new myStack(a);
+  *out += b;
+  return *out;
 } 
 
-myStack operator*(const myStack& a, const myStack& b)
+myStack& operator*(const myStack& a, const myStack& b)
 {
-  myStack out(a);
-  out *= b;
-  return out;
+  myStack *out = new myStack(a);
+  *out *= b;
+  return *out;
 }
 
-myStack operator/(const myStack& a, const myStack& b)
+myStack& operator/(const myStack& a, const myStack& b)
 {
-  myStack out(a);
-  out /= b;
-  return out;
+  myStack *out = new myStack(a);
+  *out /= b;
+  return *out;
 }
 
-myStack operator-(const myStack& a, const myStack& b)
+myStack& operator-(const myStack& a, const myStack& b)
 {
-  myStack out(b);
-  out -= b;
-  return out;
+  myStack *out = new myStack(a);
+  *out -= b;
+  return *out;
 }

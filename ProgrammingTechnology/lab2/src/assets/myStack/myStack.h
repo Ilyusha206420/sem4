@@ -18,11 +18,11 @@ private:
 
 class myStack {
 public:
-  friend myStack operator+(const myStack& a, const myStack &b);
-  friend myStack operator*(const myStack& a, const myStack& b);
+  friend myStack& operator+(const myStack& a, const myStack &b);
+  friend myStack& operator*(const myStack& a, const myStack& b);
   void operator=(const myStack& other);
-  friend myStack operator/(const myStack& a, const myStack& b);
-  friend myStack operator-(const myStack& a, const myStack& b);
+  friend myStack& operator/(const myStack& a, const myStack& b);
+  friend myStack& operator-(const myStack& a, const myStack& b);
   void operator+=(const myStack& other);
   void operator*=(const myStack& other);
   void operator/=(const myStack& other);
