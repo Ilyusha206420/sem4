@@ -2,7 +2,6 @@ import math
 from collections import deque
 
 def run_huffman_lab_7(inpStr):
-    # Статистика
     d = {}
     for char in inpStr:
         d[char] = d.get(char, 0) + 1
@@ -50,8 +49,8 @@ def run_huffman_lab_7(inpStr):
     print(f"|{'Символ':^8}|{'ASCII':^8}|{'Частота':^8}|{'Длина':^6}|{'Код':^12}|")
     print("-" * 50)
     for char in sorted(d.keys()):
-        ascii_val = ord(char.encode('cp1251'))
-        print(f"|{char:^8}|{bin(ascii_val):^8}|{d[char]:^8}|{len(codes[char]):^6}|{codes[char]:^12}|")
+        ascii_val = bin(ord(char.encode('cp1251')))[2:].zfill(8)
+        print(f"|{char:^8}|{ascii_val:^8}|{d[char]:^8}|{len(codes[char]):^6}|{codes[char]:^12}|")
 
     print(f"\nc1(x) [служебная]: {c1_x}")
     print(f"\nc2(x) [сообщение]: {c2_x}")

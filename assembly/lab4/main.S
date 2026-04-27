@@ -71,7 +71,7 @@ inpLoopEnd:
 
   movq  $0,              %rax
   movq  outArrPtr,       %r11
-  movq  $0,              %rbx
+  movq  $1,              %rbx
   movq  $2,              %r10
   movq  inpArrPtr,       %r12
   
