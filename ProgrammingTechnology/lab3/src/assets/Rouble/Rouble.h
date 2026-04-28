@@ -1,0 +1,15 @@
+#pragma once
+
+class Rouble
+{
+  public:
+    Rouble (float val, float exRate): _val(val), _exRate(exRate) {} ;
+    void set(float newVal) { _val = newVal; };
+    float get() { return _val; };
+    virtual void print() const = 0;
+    virtual float toRub() const = 0;
+    virtual void fromRub(float rub) = 0;
+  protected:
+    float _val;
+    float _exRate;;
+};
