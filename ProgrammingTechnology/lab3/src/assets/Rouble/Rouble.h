@@ -3,7 +3,8 @@
 class Rouble
 {
   public:
-    Rouble (float val, float exRate): _val(val), _exRate(exRate) {} ;
+    Rouble(): _val(0) {}; 
+    Rouble(float val): _val(val) {} ;
     void set(float newVal) { _val = newVal; };
     float get() { return _val; };
     virtual void print() const = 0;
@@ -11,5 +12,4 @@ class Rouble
     virtual void fromRub(float rub) = 0;
   protected:
     float _val;
-    float _exRate;;
 };
