@@ -77,7 +77,7 @@ def run_huffman_lab_8(inpStr):
         rem_chars -= nj
         nodes_on_tier = (nodes_on_tier - nj) * 2
 
-    print(f"\nc1(x) [длина {len(c1_x)}]: {c1_x}")
+    print(f"\nc1(x) [длина {len(c1_x)}]")
     print(f"c2(x) [длина {len(c2_x)}]: {c2_x}")
     
     l1, l2 = len(c1_x), len(c2_x)
@@ -87,7 +87,6 @@ def run_huffman_lab_8(inpStr):
 
     print(f"\nПараметры:")
     print(f"l1 = {l1}, l2 = {l2}, l = {l1 + l2}")
-    print(f"H = {H:.5f}, R = {R:.5f}, R-H = {R-H:.5f}")
 
 try:
     with open("../inputText", "r", encoding="utf-8") as f:
