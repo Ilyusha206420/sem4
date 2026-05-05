@@ -5,6 +5,7 @@ class Rouble
   public:
     Rouble(): _val(0) {}; 
     Rouble(float val): _val(val) {} ;
+    virtual ~Rouble() {};
     void set(float newVal) { _val = newVal; };
     float get() { return _val; };
     virtual void print() const = 0;

@@ -50,6 +50,5 @@ int main()
             << "\nJapanese Yens: " << jy.toRub()
             << "\nPounds Sterling: " << ps.toRub()
             << std::endl; 
-
   return 0;
 }
