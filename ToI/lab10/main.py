@@ -26,7 +26,7 @@ def lz77_encode(text):
             substring = text[idx:idx+length]
             pos = history.rfind(substring)
             if pos != -1:
-                match_dist = len(history) - pos
+                match_dist = len(history) - pos - 1
                 match_len = length
             else:
                 break
