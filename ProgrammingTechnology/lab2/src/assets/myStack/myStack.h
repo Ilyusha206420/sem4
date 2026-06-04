@@ -18,19 +18,23 @@ private:
 
 class myStack {
 public:
-  // void operator+(const myStack& other);
-  // void operator*(const myStack& other);
-  // void operator=(const myStack& other);
-  // void operator/(const myStack& other);
-  // void operator-(const myStack& other);
-  // void operator+=(const myStack& other);
-  // void operator*=(const myStack& other);
-  // void operator/=(const myStack& other);
-  // void operator-=(const myStack& other);
+  friend myStack& operator+(const myStack& a, const myStack &b);
+  friend myStack& operator*(const myStack& a, const myStack& b);
+  void operator=(const myStack& other);
+  friend myStack& operator/(const myStack& a, const myStack& b);
+  friend myStack& operator-(const myStack& a, const myStack& b);
+  void operator+=(const myStack& other);
+  void operator*=(const myStack& other);
+  void operator/=(const myStack& other);
+  void operator-=(const myStack& other);
 
-  // friend std::ostream operator<<(std::ostream& os, myStack& stack);
+  int pop();
+  void push(int val) { _head = _head->createAndLink(val); _size += 1 ; };
+
+  friend std::ostream& operator<<(std::ostream& os, myStack& stack);
 
   myStack();
+  myStack(const myStack& outher);
   ~myStack();
 private:
   stackNode* _head;
